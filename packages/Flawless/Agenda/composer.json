@@ -1,0 +1,24 @@
+{
+    "name": "bagisto/agenda",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carlos Gamez",
+            "email": "carlosgarts@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Flawless\\Agenda\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Flawless\\Agenda\\Providers\\AgendaServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
