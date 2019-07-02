@@ -1,17 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace Flawless\Agenda\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Appointment;
-use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\Admin\StoreAppointmentsRequest;
-use App\Http\Requests\Admin\UpdateAppointmentsRequest;
+use Flawless\Agenda\Models\Appointment;
+use Flawless\Agenda\Models\Service;
+use Flawless\Agenda\Http\Requests\Admin\StoreAppointmentsRequest;
+use Flawless\Agenda\Http\Requests\Admin\UpdateAppointmentsRequest;
 use Carbon\Carbon;
 
 class AppointmentsController extends Controller
 {
+
+    protected $_config;
+
+    public function __construct()
+    {
+        $this->_config = request('_config');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,17 +27,7 @@ class AppointmentsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view($this->_config['view']);
     }
 
     /**
@@ -40,12 +38,14 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $finish = Carbon::parse($request['start'])->addHour();
+        $service = Service::find($request['service_id']);
+        $finish = Carbon::parse($request['start_time'])->add($service->duration);
         try {
             $appointment = new Appointment;
             $appointment->user_id = $request['id_user'];
-            $appointment->employee_id = '1';
-            $appointment->start_time = $request['start'];
+            $appointment->customer_id = $request['customer_id'];
+            $appointment->service_id = $request['service_id'];
+            $appointment->start_time = $request['start_time'];
             $appointment->finish_time = $finish;
             $appointment->comments = $request['comments'];
             $appointment->save();
@@ -53,7 +53,7 @@ class AppointmentsController extends Controller
             return ['status' => 'error'];
         }
         return ['status' => 'succes'];
-		
+
     }
 
     /**

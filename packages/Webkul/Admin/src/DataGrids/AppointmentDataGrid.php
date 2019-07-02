@@ -26,6 +26,7 @@ class AppointmentDataGrid extends DataGrid
               ->leftJoin('services', 'appointments.service_id', '=', 'services.id')
               ->select('appointments.id as id', 'customers.phone as phone', 'services.name as service_name', 'appointments.start_time as start_time', 'appointments.finish_time as finish_time', 'appointments.confirmed as confirmed')
               ->addSelect(DB::raw('CONCAT(customers.first_name, " ", customers.last_name) as full_name'))
+              ->where('appointments.deleted_at', null)
               ->groupBy('appointments.id');
 
               $this->addFilter('id', 'appointments.service_id');

@@ -189,11 +189,17 @@ class AppointmentsController extends Controller
      */
     public function destroy($id)
     {
+      try {
         $appointment = Appointment::findOrFail($id);
         $appointment->delete();
 
         session()->flash('success', 'Grupo Eliminado');
         return redirect()->route('agenda.appointments.index');
+      } catch (\Exception $e) {
+        return $e;
+      }
+
+
     }
 
     /**

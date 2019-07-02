@@ -2,12 +2,12 @@
 
 namespace Flawless\Agenda\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use Flawless\Agenda\Models\Service;
 use Illuminate\Http\Request;
 use Flawless\Agenda\Http\Requests\Admin\StoreServicesRequest;
 use Flawless\Agenda\Http\Requests\Admin\UpdateServicesRequest;
+use Flawless\Agenda\Models\Group;
 
 class ServicesController extends Controller
 {

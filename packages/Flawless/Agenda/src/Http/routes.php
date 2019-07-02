@@ -1,9 +1,22 @@
 <?php
 
-    // Route::view('/agenda', 'agenda::agenda.agenda');
-    // Route::view('/agenda/citas', 'agenda::agenda.agenda');
-    // Route::view('/agenda/servicios', 'agenda::agenda.agenda');
-    // Route::view('/agenda/horarios', 'agenda::agenda.agenda');
+    //Api
+    Route::get('api/servicios', 'Flawless\Agenda\Http\Controllers\Api\ServicesController@retrieveServices');
+    Route::get('api/horario', 'Flawless\Agenda\Http\Controllers\Api\SchedulesController@retrieveSchedule');
+    Route::get('api/feriados', 'Flawless\Agenda\Http\Controllers\Api\SchedulesController@retrieveHollydays');
+    Route::get('api/disponible', 'Flawless\Agenda\Http\Controllers\Api\ServicesController@checkAvailable');
+
+    Route::post('api/ShowAppointment', 'Flawless\Agenda\Http\Controllers\Api\AppointmentsController@show')->defaults('_config', [
+        'authorization_required' => true
+    ]);
+
+    Route::post('api/CreateAppointment', 'Flawless\Agenda\Http\Controllers\Api\AppointmentsController@store')->defaults('_config', [
+        'authorization_required' => true
+    ]);
+    Route::post('api/DeleteAppointment', 'Flawless\Agenda\Http\Controllers\Api\AppointmentsController@delete')->defaults('_config', [
+        'authorization_required' => true
+    ]);
+
 Route::group(['middleware' => ['admin']], function () {
     Route::get('agenda', 'Flawless\Agenda\Http\Controllers\AgendaController@index')->defaults('_config', ['view' => 'agenda::agenda.index'])->name('agenda.index');
     Route::get('agenda/citas', 'Flawless\Agenda\Http\Controllers\AgendaController@index')->defaults('_config', ['view' => 'agenda::agenda.citas.index'])->name('agenda.citas.index');
