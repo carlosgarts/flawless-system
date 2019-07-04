@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\Admin\StoreAppointmentsRequest;
 use App\Http\Requests\Admin\UpdateAppointmentsRequest;
 use Carbon\Carbon;
+use DB;
 use Flawless\Agenda\Models\Group;
 use Flawless\Agenda\Http\Requests\Admin\StoreGroupsRequest;
 use Flawless\Agenda\Http\Requests\Admin\UpdateGroupsRequest;
@@ -43,7 +44,8 @@ class ServicesController extends Controller
 
       $space = DB::table('appointments')
               ->select(DB::raw('count(id) as bussy') )
-              ->where('service_id', '=', $request['service_id'],)
+              ->where('service_id', '=', $request['service_id'])
+              ->where('deleted_at', null)
               ->whereBetween('start_time', [$request['start_time'], $request['finish_time']])
               ->orWhereBetween('finish_time', [$request['start_time'], $request['finish_time']])
               ->orWhereBetween('finish_time', [$request['start_time'], $request['finish_time']])
@@ -58,5 +60,6 @@ class ServicesController extends Controller
                   return response()->json([
                     "response" => "free"
                   ]);
-    }
-}
+                }
+              }
+  }

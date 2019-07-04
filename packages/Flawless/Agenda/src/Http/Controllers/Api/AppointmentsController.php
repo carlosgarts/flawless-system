@@ -20,15 +20,6 @@ class AppointmentsController extends Controller
         $this->_config = request('_config');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view($this->_config['view']);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,15 +29,12 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
-        $service = Service::find($request['service_id']);
-        $finish = Carbon::parse($request['start_time'])->add($service->duration);
         try {
             $appointment = new Appointment;
-            $appointment->user_id = $request['id_user'];
             $appointment->customer_id = $request['customer_id'];
             $appointment->service_id = $request['service_id'];
             $appointment->start_time = $request['start_time'];
-            $appointment->finish_time = $finish;
+            $appointment->finish_time = $request['finish_time'];
             $appointment->comments = $request['comments'];
             $appointment->save();
         } catch (\Throwable $th) {
@@ -65,7 +53,7 @@ class AppointmentsController extends Controller
     public function show(Request $request)
     {
         try {
-            $appointment = Appointment::where('user_id', $request['user_id'])->where('start_time', '>=', Carbon::now())->orderBy('start_time', 'asc')->take(3)->get();
+            $appointment = Appointment::where('customer_id', $request['customer_id'])->where('start_time', '>=', Carbon::now())->orderBy('start_time', 'asc')->take(3)->get();
         } catch (\Throwable $th) {
             return ['status' => 'error'];
         }

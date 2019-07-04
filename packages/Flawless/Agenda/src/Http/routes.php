@@ -6,7 +6,7 @@
     Route::get('api/feriados', 'Flawless\Agenda\Http\Controllers\Api\SchedulesController@retrieveHollydays');
     Route::get('api/disponible', 'Flawless\Agenda\Http\Controllers\Api\ServicesController@checkAvailable');
 
-    Route::post('api/ShowAppointment', 'Flawless\Agenda\Http\Controllers\Api\AppointmentsController@show')->defaults('_config', [
+    Route::get('api/ShowAppointment', 'Flawless\Agenda\Http\Controllers\Api\AppointmentsController@show')->defaults('_config', [
         'authorization_required' => true
     ]);
 

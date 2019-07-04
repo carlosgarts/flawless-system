@@ -39,7 +39,7 @@ class SessionController extends Controller
 
         auth()->setDefaultDriver($this->guard);
 
-        $this->middleware('auth:' . $this->guard, ['only' => ['get', 'update', 'destroy']]);
+        $this->middleware('auth:' . $this->guard, ['only' => ['post', 'get', 'update', 'destroy']]);
         
         $this->_config = request('_config');
 
@@ -71,7 +71,8 @@ class SessionController extends Controller
         $customer = auth($this->guard)->user();
  
         return response()->json([
-            'token' => $jwtToken,
+            'token' =>  $jwtToken,
+            'api_token' => auth($this->guard),
             'message' => 'Logged in successfully.',
             'data' => new CustomerResource($customer)
         ]);

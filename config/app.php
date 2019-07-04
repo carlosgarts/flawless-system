@@ -261,7 +261,9 @@ return [
         Webkul\Discount\Providers\DiscountServiceProvider::class,
 
         //Flawless package
-        Flawless\Agenda\Providers\AgendaServiceProvider::class
+        Flawless\Agenda\Providers\AgendaServiceProvider::class,
+
+        Barryvdh\Cors\ServiceProvider::class
     ],
 
     /*
