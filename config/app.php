@@ -262,7 +262,9 @@ return [
 
         //Flawless package
         Flawless\Agenda\Providers\AgendaServiceProvider::class,
-
+        //Tokens
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        //CORS
         Barryvdh\Cors\ServiceProvider::class
     ],
 

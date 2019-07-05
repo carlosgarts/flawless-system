@@ -72,7 +72,6 @@ class SessionController extends Controller
  
         return response()->json([
             'token' =>  $jwtToken,
-            'api_token' => auth($this->guard),
             'message' => 'Logged in successfully.',
             'data' => new CustomerResource($customer)
         ]);
