@@ -144,7 +144,9 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::get('customer/logout', 'SessionController@destroy');
 
-        Route::get('customer/get', 'SessionController@get');
+        Route::group(['middleware' => 'auth.jwt'], function () {
+            Route::get('customer/get', 'SessionController@get');
+        });
 
         Route::put('customer/profile', 'SessionController@update');
 

@@ -21,8 +21,10 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "opencollective-postinstall": "^2.0.1",
-        "opencollective": "^1.0.3"
+        "@nuxtjs/auth": "^4.8.1",
+        "@nuxtjs/axios": "^5.5.4",
+        "opencollective": "^1.0.3",
+        "opencollective-postinstall": "^2.0.1"
     },
     "collective": {
         "type": "opencollective",
