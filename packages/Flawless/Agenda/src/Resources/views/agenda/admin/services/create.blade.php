@@ -70,20 +70,20 @@
                                         <label for="duration" class="required">Duración</label>
 
                                         <select type="text" class="control" name="duration" v-model="duration" v-validate="'required'" value="{{ old('duration') }}">
-                                                <option value="00:15:00">00:15</option>
-                                                <option value="00:30:00">00:30</option>
-                                                <option value="00:45:00">00:45</option>
-                                                <option value="01:00:00">01:00</option>
-                                                <option value="01:30:00">01:30</option>
-                                                <option value="02:00:00">02:00</option>
-                                                <option value="02:30:00">02:30</option>
-                                                <option value="03:00:00">03:00</option>
-                                                <option value="03:30:00">03:30</option>
-                                                <option value="04:00:00">04:00</option>
-                                                <option value="04:30:00">04:30</option>
-                                                <option value="05:00:00">05:00</option>
-                                                <option value="05:30:00">05:30</option>
-                                                <option value="06:00:00">06:00</option>
+                                                <option value="15">00:15</option>
+                                                <option value="30">00:30</option>
+                                                <option value="45">00:45</option>
+                                                <option value="60">01:00</option>
+                                                <option value="90">01:30</option>
+                                                <option value="120">02:00</option>
+                                                <option value="150">02:30</option>
+                                                <option value="180">03:00</option>
+                                                <option value="210">03:30</option>
+                                                <option value="240">04:00</option>
+                                                <option value="270">04:30</option>
+                                                <option value="300">05:00</option>
+                                                <option value="330">05:30</option>
+                                                <option value="360">06:00</option>
                                         </select>
 
                                         <span class="control-error" v-if="errors.has('duration')">@{{ errors.first('duration') }}</span>

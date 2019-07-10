@@ -30,11 +30,15 @@ class AppointmentsController extends Controller
     public function store(Request $request)
     {
         try {
+            // calculate finish hour
+            $serviceForTime = Service::findOrFail($request['service_id']);
+            $finish_time = Carbon::createFromFormat('Y-m-d H:i:s', $request['start_time'])->addMinutes($serviceForTime->duration)->toDateTimeString();
+            // insert
             $appointment = new Appointment;
             $appointment->customer_id = $request['customer_id'];
             $appointment->service_id = $request['service_id'];
             $appointment->start_time = $request['start_time'];
-            $appointment->finish_time = $request['finish_time'];
+            $appointment->finish_time = $finish_time;
             $appointment->comments = $request['comments'];
             $appointment->save();
         } catch (\Throwable $th) {

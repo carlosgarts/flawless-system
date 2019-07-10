@@ -19,7 +19,7 @@ class CreateServicesTable extends Migration
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->string('name', 191)->nullable();
             $table->float('price', 8, 2);
-            $table->time('duration');
+            $table->integer('duration');
             $table->integer('available')->nullable();
             $table->text('description')->nullable();
             $table->string('image', 191)->nullable();

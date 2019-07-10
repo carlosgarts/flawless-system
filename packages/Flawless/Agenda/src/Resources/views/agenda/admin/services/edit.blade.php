@@ -56,24 +56,9 @@
                                     </div>
 
                                     <div class="control-group" :class="[errors.has('duration') ? 'has-error' : '']">
-                                        <label for="duration" class="required">Duración</label>
+                                        <label for="duration" class="required">Duración (en minutos)</label>
 
-                                        <select type="text" class="control" name="duration" v-validate="'required'" value="{{$service->duration}}">
-                                                <option value="00:15:00">00:15</option>
-                                                <option value="00:30:00">00:30</option>
-                                                <option value="00:45:00">00:45</option>
-                                                <option value="01:00:00">01:00</option>
-                                                <option value="01:30:00">01:30</option>
-                                                <option value="02:00:00">02:00</option>
-                                                <option value="02:30:00">02:30</option>
-                                                <option value="03:00:00">03:00</option>
-                                                <option value="03:30:00">03:30</option>
-                                                <option value="04:00:00">04:00</option>
-                                                <option value="04:30:00">04:30</option>
-                                                <option value="05:00:00">05:00</option>
-                                                <option value="05:30:00">05:30</option>
-                                                <option value="06:00:00">06:00</option>
-                                        </select>
+                                        <input type="number" min="0"  max ="1440" class="control" name="duration" v-validate="'required|numeric'" value="{{$service->duration}}">
 
                                         <span class="control-error" v-if="errors.has('duration')">@{{ errors.first('duration') }}</span>
                                     </div>
@@ -114,7 +99,7 @@
                       day: null,
                       group_id: null,
                       price: 0,
-                      duration: '00:15:00',
+                      duration: '15',
                       available: 0,
                     }
                 }
