@@ -146,9 +146,10 @@ Route::group(['prefix' => 'api'], function ($router) {
 
         Route::group(['middleware' => 'auth.jwt'], function () {
             Route::get('customer/get', 'SessionController@get');
+            Route::put('customer/profile', 'SessionController@update');
         });
 
-        Route::put('customer/profile', 'SessionController@update');
+        
 
         Route::post('customer/register', 'CustomerController@create');
 
